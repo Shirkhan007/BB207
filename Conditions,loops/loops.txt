@@ -1,0 +1,63 @@
+verilmis ededin reqemlerinin hasilini tapin:
+           
+            int a = 34;
+            int b = 0;
+            int hasil = 1;
+            while (a > 10)
+            {
+                b = a % 10;
+                a = a / 10;
+                hasil = a * b;
+
+                Console.WriteLine(hasil);
+            }
+
+verilmis ededin faktorialini tapin:
+
+            int a = 6;
+           int fakt = 1;
+            for (int i = 1; i <= a; i++)
+            {
+                fakt*=i;
+
+            
+            
+            }
+            Console.WriteLine(fakt);
+
+verilmis ededin sade ve ya murekkeb oldugunu tapan alqoritm
+
+             int a = 12;
+            for (int i = 2; i < 10; i++)
+            {
+                if (a % i == 0)
+                {
+                    Console.WriteLine("Murekkb ededdir");
+                    break;
+                }
+                else {
+                    Console.WriteLine("sadedir");
+                    break;
+                }
+            }
+
+verilmis ededin polidrom olub olmadigini tapan alqoritm:
+            int a = 1221;
+            int c = a;
+            int polid = 0;
+            while (a > 0)
+            {
+               
+                int qaliq = a % 10;
+                polid = (polid * 10) + qaliq;
+                a = a / 10;
+               
+            }
+            if (c == polid)
+            {
+                Console.WriteLine("polidromdu:");
+            }
+            else {
+                Console.WriteLine("polidrom deyil:");
+            
+            }
