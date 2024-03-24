@@ -1,0 +1,155 @@
+static void Main(string[] args)
+        {
+            Employee employee = new Employee("test", "testov", 21, 2, 1676);
+            Employee employee1 = new Employee("test1", "testzade", 22, 3, 1776);
+            Employee employee2 = new Employee("test2", "testli", 23, 6, 1876);
+
+            Department.ShowEmployeeInfo(ref employee, ref employee1, ref employee2);
+
+            Department department = new Department();
+
+            Employee empo1 = new Employee("test12", "testova", 22, 3, 2332);
+            Employee empo2 = new Employee("test13", "testov", 25, 5, 3132);
+
+            department.AddEmployee(empo1);
+            department.AddEmployee(empo2);
+
+            Console.WriteLine("Isciler");
+            department.Employees();
+
+
+
+
+
+            int choice;
+            do
+            {
+                Console.WriteLine("1. Isci elave et");
+                Console.WriteLine("2. butun Iscilere bax");
+                Console.WriteLine("3. Maas araligina gore is axtar");
+                Console.WriteLine("0. proqramdan cixis");
+                choice = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        Console.Write("Isci adini elave et: ");
+                        string name = Console.ReadLine();
+                        Console.Write("iscinin soyadini elave et: ");
+                        string surename = Console.ReadLine();
+                        Console.Write("Iscinin Yashini elave et: ");
+                        byte Age = Convert.ToByte(Console.ReadLine());
+                        Console.Write("iscinin sobe nomresinin elave et: ");
+                        int departmentno = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("iscinin maas elave et: ");
+                        double Salary = Convert.ToDouble(Console.ReadLine());
+
+                        Employee newEmployee = new Employee(name, surename, Age, departmentno, Salary);
+                        department.AddEmployee(newEmployee);
+                        break;
+
+
+
+                    
+                    case 2:
+                        department.Employees();
+                        break;
+
+                    case 0:
+                        Console.WriteLine("proqramdan cixis...");
+                        break;
+
+                    default:
+                        Console.WriteLine("Xais edirik biraz sonra zeng edesiz.");
+                        break;
+                }
+
+            } while (choice != 0);
+
+        }
+            
+    
+
+
+
+
+
+
+        class Employee
+        {
+            public string Name;
+            public string Surname;
+            public byte Age;
+            public int DepartmentNo;
+            public double Salary;
+
+
+            public Employee(string mame,string surename,byte age,int departmentno,double salary)
+            {
+               Name = mame;
+               Surname = surename; 
+               Age = age;
+               DepartmentNo = departmentno;    
+               Salary = salary;
+            }
+
+        }
+        class Department
+        {
+            public Employee[] employees;
+            public int count;
+            public Department()
+            {
+                employees = new Employee[21];
+                count = 0;
+
+            }
+            public void AddEmployee(Employee employee)
+            {
+
+                if (count < employees.Length)
+                {
+                    employees[count] = employee;
+                    count++;
+                }
+                else
+                {
+                    Console.WriteLine("Iscimiz var Cixaranda cagiraciq.");
+                }
+            }
+            public void Employees()
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    Console.WriteLine($"Iscinin adi {employees[i].Name} iscinin soyadi {employees[i].Surname}, iscinin yasi{employees[i].Age},iscinin departmentNo {employees[i].DepartmentNo},iscinin maasi {employees[i].Surname}");
+                }
+            }
+                #region ShowEmployeeInfo
+                public  static void ShowEmployeeInfo(ref Employee employee, ref  Employee employee1,  ref Employee employee2)
+                {
+                    Console.WriteLine("Iscinin melumatlari");
+                    Console.WriteLine("Iscinin adi:" + employee.Name);
+                    Console.WriteLine("Iscinin Soyadi:" + employee.Surname);
+                    Console.WriteLine("Iscinin Yashi:" + employee.Age);
+                    Console.WriteLine("Iscinin DepartmentNo" + employee.DepartmentNo);
+                    Console.WriteLine("Iscinin masshi" + employee.Salary);
+                    Console.WriteLine("************************************************");
+                    Console.WriteLine("Iscinin melumatlari");
+                    Console.WriteLine("Iscinin adi:" + employee1.Name);
+                    Console.WriteLine("Iscinin Soyadi:" + employee1.Surname);
+                    Console.WriteLine("Iscinin Yashi:" + employee1.Age);
+                    Console.WriteLine("Iscinin DepartmentNo" + employee1.DepartmentNo);
+                    Console.WriteLine("Iscinin masshi" + employee1.Salary);
+                    Console.WriteLine("************************************************");
+                    Console.WriteLine("Iscinin melumatlari");
+                    Console.WriteLine("Iscinin adi:" + employee2.Name);
+                    Console.WriteLine("Iscinin Soyadi:" + employee2.Surname);
+                    Console.WriteLine("Iscinin Yashi:" + employee2.Age);
+                    Console.WriteLine("Iscinin DepartmentNo" + employee2.DepartmentNo);
+                    Console.WriteLine("Iscinin masshi" + employee2.Salary);
+                }
+                #endregion
+
+
+
+   }    }
