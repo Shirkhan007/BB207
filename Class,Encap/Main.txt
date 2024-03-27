@@ -1,0 +1,13 @@
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Book book = new Book("test",6.55,"dram",5);
+            Book book1 = new Book("test1", 4.55, "aglamali", 7);
+            Book book2 = new Book("test2", 7.55, "gulmeli", 4);
+            book.ShowInfo();
+        }
+    }
+}

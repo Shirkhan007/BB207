@@ -1,0 +1,18 @@
+namespace ConsoleApp1
+{
+    internal class Book: product
+    {
+        public string Genre;
+        public Book(string name,double price,string genre,int no)
+        {
+            Name = name;
+            Price = price;
+            Genre = genre;
+            No = no;
+        }
+        public void ShowInfo()
+        {
+            Console.WriteLine($"Adi: {Name} Price {Price} Genre: {Genre} No: {No}");
+        }
+    }
+}
