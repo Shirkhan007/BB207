@@ -1,0 +1,26 @@
+ static void Main(string[] args)
+        {
+            Console.WriteLine(Check("Hello World"));
+        }
+
+        static bool Check(string words)
+        {
+            int spaceIndex = -1;
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (words[i] == ' ')
+                {
+                    spaceIndex = i;
+                    break;
+                }
+            }
+
+            if (spaceIndex == -1 || !char.IsUpper(words[0]) || !char.IsUpper(words[spaceIndex + 1]))
+            {
+                return false;
+            }
+
+            return true;
+        }
+    }

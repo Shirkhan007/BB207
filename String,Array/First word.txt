@@ -1,0 +1,25 @@
+static void Main(string[] args)
+        {
+            string word = "salam necesen med dk.";
+            string word1=word;
+            Console.WriteLine(FirstWord(word1));
+            
+
+            
+        }
+        static string FirstWord(string word)
+        {
+
+            string word1 = "";
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (word[i]==' ')
+                {
+                    break;
+                }
+                word1+=word[i];
+            }
+            return word1;
+        
+        
+        }

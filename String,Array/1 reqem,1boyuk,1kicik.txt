@@ -1,0 +1,49 @@
+static void Main(string[] args)
+        {
+            string word = "Password123";
+            string word1 = "password";
+            string word2 = "123456";
+            string word3 = "PASSWORD";
+            string word4 = "Password";
+
+            Console.WriteLine(Check1(word)); 
+            Console.WriteLine(Check1(word1));
+            Console.WriteLine(Check1(word2));
+            Console.WriteLine(Check1(word3));
+            Console.WriteLine(Check1(word4));
+        }
+
+        static bool Check1(string word)
+        {
+            bool reqem = false;
+            bool Upper= false;
+            bool Lower = false;
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                char c = word[i];
+
+                if (char.IsDigit(c))
+                {
+                    reqem = true;
+                }
+                else if (char.IsUpper(c))
+                {
+                    Upper = true;
+                }
+                else if (char.IsLower(c))
+                {
+                    Lower = true;
+                }
+
+                
+                if (reqem && Upper && Lower)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+    }

@@ -1,0 +1,29 @@
+static void Main(string[] args)
+        {
+            string word = "salam        dunya";
+            Spaces(ref word);
+            Console.WriteLine("\"" + word + "\"");
+        }
+
+        static void Spaces(ref string word)
+        {
+            string empty = "";
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (word[i] == ' ')
+                {
+                    if (i == 0 || word[i - 1] != ' ')
+                    {
+                        empty += ' ';
+                    }
+                }
+                else
+                {
+                    empty += word[i];
+                }
+            }
+
+            word = empty;
+        }
+    }
