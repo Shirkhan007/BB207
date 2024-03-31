@@ -1,0 +1,65 @@
+ internal class Group
+    {
+
+        private string _no;
+        public string No
+        {
+            get
+            { return _no; }
+            set
+            {
+                if (value.Length != 6 || !char.IsUpper(value[0]) || !char.IsUpper(value[1]) || !char.IsDigit(value[2]) || !char.IsDigit(value[3]) || !char.IsDigit(value[4]))
+                {
+                    Console.WriteLine("Yanlış qrup nömrə formatı");
+                }
+                _no = value; }
+        }
+        private int _studentlimit;
+        public int StudentLimit
+        {
+            get { return _studentlimit; }
+            set
+            {
+                if(value < 0 || value > 20)
+             Console.WriteLine("Tələbə limiti 0 ilə 20 arasında olmalıdır.");
+
+
+                _studentlimit = value;
+            }
+            
+        }
+        private int _studentCount;
+
+        public Group(string no,  int studentlimit)
+        {
+            No = no;
+            _studentlimit = studentlimit;
+            students = new Student[StudentLimit];
+            _studentCount = 0;
+        }
+
+        Student[] students = { };
+        public void AddStudent(Student student)
+        {
+            //Array.Resize(ref students, students.Length);
+            //students[students.Length - 1] = student;
+            if (_studentCount < StudentLimit)
+            {
+                students[_studentCount++] = student;
+                Console.WriteLine($"Telebe {student.FullName} qrupa əlavə edildi {No}.");
+            }
+            else
+            {
+                Console.WriteLine($"qrupa əlavə olunmadi {student.FullName}. Student limit ({StudentLimit}) qrup halında  {No}.");
+            }
+        }
+        public void ShowAllStudents()
+        {
+            Console.WriteLine($"Qrupdaki tələbələr {No}:");
+            for (int i = 0; i < _studentCount; i++)
+            {
+                Console.WriteLine($"Name: {students[i].FullName}, Group: {students[i].GroupNo}, Average Point: {students[i].AvgPoint}");
+            }
+        }
+
+    }

@@ -1,0 +1,67 @@
+ internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Group group = new Group("BB207", 15);
+            do
+            {
+                Console.WriteLine("1. Tələbə əlavə et" +
+                                "\n2. Bütün tələbələrə bax" +
+                                "\n3. Tələbələr üzrə axtarış et" +
+                                "\n0. Proqramı bitir");
+                string answer = Console.ReadLine();
+                switch (answer)
+                {
+                    case "1":
+                        if (group == null)
+                        {
+                            Console.WriteLine("Qrup yaradin");
+                            continue;
+                        }
+                        Console.WriteLine("Telebenin Fullname elave et");
+                        string fullname = Console.ReadLine();
+                        Console.WriteLine("Telebenin Qrup nomresi elave et");
+                        string groupNo = Console.ReadLine();
+
+                        string avgPoint;
+                        double AvgPoint;
+                        do
+                        {
+                            Console.WriteLine("Telebenin Ortalama balini elave et");
+                            avgPoint = Console.ReadLine();
+                        } while (!double.TryParse(avgPoint, out AvgPoint));
+
+
+                        Student student = new Student(fullname, groupNo, AvgPoint);
+                        group.AddStudent(student);
+                        break;
+
+                    case "2":
+
+                        if (group == null)
+                        {
+                            Console.WriteLine("Please create a group first.");
+                            continue;
+                        }
+                        group.ShowAllStudents();
+                        break;
+                    case "0":
+                        Console.WriteLine("proqramdan cixis...");
+                        return;
+                    default:
+                        break;
+                }
+                if (group == null)
+                {
+                    Console.Write("Enter group number: ");
+                    string groupNo = Console.ReadLine();
+                    Console.Write("Enter student limit: ");
+                    int studentLimit = Convert.ToInt32(Console.ReadLine());
+                    group = new Group(groupNo, studentLimit);
+                }
+            } while (true);
+
+
+        }
+
+    }
