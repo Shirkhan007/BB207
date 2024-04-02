@@ -1,0 +1,11 @@
+ static void Main(string[] args)
+        {
+            Vehicle[] vehicles = new Vehicle[2];
+            vehicles[0] = new Car("Toyota", "Corolla", 180);
+            vehicles[1] = new Bus(20, 2007);
+            foreach (Vehicle vehicle in vehicles)
+            {
+                vehicle.ShowInfo();
+                Console.WriteLine();
+            }
+        }

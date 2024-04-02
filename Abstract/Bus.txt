@@ -1,0 +1,21 @@
+internal class Bus : Vehicle
+    {
+        private int _passangercount { get; set; }
+        public int PassengerCount
+        {
+            get { return _passangercount; }
+            set { _passangercount = value; }
+        }
+        public Bus(int passangercount,int year):base(year)
+        {
+
+            PassengerCount = passangercount;
+
+        }
+        
+
+        public override void ShowInfo()
+        {
+            Console.WriteLine($"PassangerCount: {PassengerCount} Year: {Year}");
+        }
+    }
