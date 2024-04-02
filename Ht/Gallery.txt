@@ -1,0 +1,33 @@
+  internal class Gallery : Cars
+    {
+        public static string Id { get; set; }
+        public  string Name { get; set; }
+       internal Cars[] Cars = { };
+      
+        public void AddCars(Cars car)
+        {
+            Array.Resize(ref Cars, Cars.Length+1);
+            Cars[Cars.Length - 1] = car;
+        }
+        public Cars[] GetAllCars()
+        {
+            Console.WriteLine($"Name {Name} Id {Id} carcode {CarCode} Speed {Speed}");
+            return Cars;
+        
+        }
+        public Cars[] FindCarsBySpeedInterval(int minspeed, int maxspeed)
+        {
+            Cars[] cars = new Cars[] { };
+            for (int i = 0; i < cars.Length; i++)
+            {
+                if (cars[i].Speed >= minspeed && cars[i].Speed <= maxspeed)
+                {
+                    Array.Resize(ref cars, cars.Length + 1);
+                    cars[cars.Length - 1] = Cars[i];
+                }
+
+                 
+            }
+            return cars;
+        }
+    }

@@ -1,0 +1,19 @@
+ static void Main(string[] args)
+        {
+           Cars cars = new Cars();
+            cars.Id = 123;
+            cars.Name = "Bmw";
+            cars.Speed = 350;
+            cars.CarCode = "AZ1000";
+            Cars cars1 = new Cars();
+            cars1.Id = 123;
+            cars1.Name = "Bmw";
+            cars1.Speed = 350;
+            cars1.CarCode = "AZ1001";
+            Gallery gallery = new Gallery();
+            gallery.AddCars(cars1);
+            gallery.AddCars(cars);
+            gallery.FindCarsBySpeedInterval(230,350);
+            gallery.GetAllCars();
+              
+        }
