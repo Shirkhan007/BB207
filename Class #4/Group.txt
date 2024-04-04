@@ -1,0 +1,76 @@
+internal class Group
+    {
+
+
+        public string GroupNo { get; set; }
+        public int StudentLimit
+        {
+            get
+            {
+                return StudentLimit;
+            }
+            set
+            {
+
+                if (StudentLimit >= 5 && StudentLimit <= 18)
+                {
+                    Console.WriteLine("elave et");
+                }
+                else
+                {
+                    Console.WriteLine("yer yoxdu");
+                }
+                StudentLimit = value;
+            }
+        }
+       
+
+        private Student[] students = new Student[] { };
+        public bool CheckGroupNo(string groupNo)
+        {
+            bool Upper = false;
+            bool Digit=false;
+            if (GroupNo.Length==5)
+            {
+                for (int i = 0; i < GroupNo.Length; i++)
+                {
+                    if (char.IsUpper(GroupNo[0]) && char.IsUpper(GroupNo[1])) Upper = true;
+                    if (char.IsDigit(GroupNo[2]) && char.IsDigit(GroupNo[2]) && char.IsDigit(GroupNo[3])) Digit = true;
+                }
+              
+            }
+            return Upper && Digit;
+        }
+        public void AddStudent(Student student)
+        {
+            if (StudentLimit==students.Length)
+            {
+                Array.Resize(ref students, students.Length + 1);
+                students[students.Length - 1] = student;
+            }
+            else
+            {
+                Console.WriteLine("yer yoxdu");
+            }
+            
+        }
+        public Student GetStudent(int id)
+        {
+            for (int i = 0; i < students.Length; i++)
+            {
+                if (students[i].Id == id)
+                {
+                    return students[i];
+                }
+            }
+
+            return null;
+        
+        }
+        public Student[] GetAllStudents()
+        {
+
+            return students;
+        
+        }
+    }

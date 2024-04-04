@@ -1,0 +1,50 @@
+ internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Student student = new Student();
+            Student student1 = new Student();
+            Student student2 = new Student();
+            Student student3 = new Student();
+            Group group = new Group();
+            group.AddStudent(student);
+            group.AddStudent(student1);
+            group.AddStudent(student2);
+            group.AddStudent(student3);
+            group.GetAllStudents();
+
+
+            do
+            {
+                Console.WriteLine("1.Telebe elave et:" +
+                               "\n2. Butun telebeleri goster" +
+                                "\n0. cixis...........");
+                string answer=Console.ReadLine();
+
+                switch (answer)
+                {
+                    case "1":
+                        Console.WriteLine("Telebe Elave et:");
+                        Console.WriteLine("***********");
+                        Console.WriteLine("Qrup No daxil et:");
+                        string groupNo = Console.ReadLine();
+                        Console.WriteLine("Telebenin adi:");
+                        string fullname = Console.ReadLine();
+                        string pointStr;
+                        int point;
+                        do
+                        {
+                            Console.WriteLine("Telebenin Balini daxil ele:");
+                            pointStr = Console.ReadLine();
+                        } while (!int.TryParse(pointStr, out int Point));
+                        break;
+                        case "2":
+                        Console.WriteLine("Butun Telebeleri goster");
+                        
+                            break;
+                    default:
+                        break;
+                }
+            } while (true);
+        }
+    }
