@@ -1,0 +1,115 @@
+internal class Store
+    {
+        private int _id { get; set; }
+        public int Id { get; set; }
+        public Store()
+        {
+            Id++;
+        }
+        public Product[] products = new Product[] { };
+        
+
+        public void AddProduct(Product product)
+        {
+            Array.Resize(ref products, products.Length + 1);
+            products[products.Length - 1] = product;
+        
+        }
+        public Product GetProduct(int no)
+        {
+            for (int i = 0; i < products.Length; i++)
+            {
+                if (products[i].No == no)
+                {
+                    return products[i];
+                }
+            }
+            return null;
+        }
+        public void RemoveProductByNo(int no)
+        {
+            int indexToRemove = -1;
+            for (int i = 0; i < products.Length; i++)
+            {
+                if (products[i].No==no)
+                {
+                    indexToRemove = i;
+                    break;
+                }
+            }
+            if (indexToRemove != -1)
+            {
+                products[indexToRemove] = products[products.Length - 1];
+                Array.Resize(ref products, products.Length - 1);
+            }
+            else
+            {
+                Console.WriteLine($"Bele nomreli mehsul yoxdur {no}");
+            }
+
+        }
+        public Product[] FilterProductsByType(string type)
+        {
+            Product[] filteredProducts = new Product[products.Length];
+            int count = 0;
+
+            for (int i = 0; i < products.Length; i++)
+            {
+                if (products[i].Type == type)
+                {
+                    filteredProducts[count] = products[i];
+                    count++;
+                }
+            }
+
+            Array.Resize(ref filteredProducts, count);
+            return filteredProducts;
+        }
+        public Product[] FilterProductByName(string name)
+        {
+            Product[] filteredProducts = new Product[products.Length];
+            int count = 0;
+
+            for (int i = 0; i < products.Length; i++)
+            {
+                if (products[i].Name==name)
+                {
+                    filteredProducts[count++] =products[i];
+                }
+            }
+            Array.Resize(ref filteredProducts, count);
+            return filteredProducts;
+        }
+        public void Sale(int no, Person person)
+        {
+            Product productToSell = null;
+            for (int i = 0; i < products.Length; i++)
+            {
+                if (products[i].No == no)
+                {
+                    productToSell = products[i];
+                    break;
+                }
+            }
+            if (productToSell == null)
+            {
+                Console.WriteLine($"bele nomreli mehsul  yoxdu {no}");
+                return;
+            }
+            if (productToSell.Count <= 0)
+            {
+                Console.WriteLine($"M'hsul qalmayib {no} ");
+                return;
+            }
+            if (person.Cash >= productToSell.Price)
+            {
+                person.Cash -= productToSell.Price;
+                productToSell.Count--;
+                Console.WriteLine($"Sale successful. {productToSell.Name} sold to {person.FullName}. Remaining cash: {person.Cash}");
+            }
+            else
+            {
+                Console.WriteLine($"Insufficient funds. {person.FullName} does not have enough cash to buy {productToSell.Name}.");
+            }
+        }
+    }

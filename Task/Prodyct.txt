@@ -1,0 +1,40 @@
+ internal class Product:Store
+    {
+        private int _no { get; set; }
+        public int No
+        {
+            get { return _no; }
+            set { value=_no; } 
+        }
+        public string Name { get; set; }
+        public Product()
+        {
+            No++;
+        }
+        private double _price { get; set; }
+        public double Price 
+        {
+            get { return _price; }
+            set
+            {
+                if (Price >= 0)
+
+                    _price = value;
+            }
+        }
+        public Product( string name, double price,string type)
+        {
+         
+            Name = name;
+            Price = price;
+            Type = type;
+        }
+
+        public string Type { get; set; }
+        public int Count {get; set; }
+        public override string ToString()
+        {
+            return $"No: {No} Name {Name} Price {Price} Count  {Count} Type: {Type}";
+        }
+
+    }

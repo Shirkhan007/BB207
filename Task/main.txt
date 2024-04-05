@@ -1,0 +1,115 @@
+ internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Store store = new Store();
+            Person person = new Person();
+            do
+            {
+                Console.WriteLine("1. Mehsul elave et" +
+                    "\n2. Mehsul sil" +
+                    "\n3. Mehsula bax" +
+                    "\n4. Type'a gore mehsullara bax" +
+                    "\n5. Ada gore mehsullara bax" +
+                    "\n0. Proqramdan cix") ;
+
+                string answer=Console.ReadLine();
+                switch (answer)
+                {
+                    case "1":
+                        Console.WriteLine(" Mehsul adi:");
+                        string name=Console.ReadLine();
+                        
+                        string priceStr;
+                        double price;
+                        do
+                        {
+                            Console.WriteLine("Qiymet");
+                            priceStr = Console.ReadLine();
+
+                        } while (!double.TryParse(priceStr,out price));
+                        string countStr;
+                        int count;
+                        do
+                        {
+                            Console.WriteLine("Sayi");
+                            countStr = Console.ReadLine();  
+                        } while (!int.TryParse(countStr,out count));
+                        Console.WriteLine("Nov:");
+                        string type=Console.ReadLine();
+                        Product product = new Product();
+                        product.AddProduct(product);
+                        Console.WriteLine("Mehsul elave adildi:");
+                        break;
+                        case "2":
+                        
+                        string noStr;
+                        int no;
+                        do
+                        {
+                            Console.WriteLine("Silmek istediyiniz Mehsulun No-nu daxil et:");
+                            noStr=Console.ReadLine();
+                           
+                        } while (!int.TryParse(noStr,out no));
+                        store.RemoveProductByNo(no);
+                        break;
+                    case "3":
+                        string productnoStr;
+                        int productno;
+                        do
+                        {
+                            Console.Write("Baxmaq istediyiniz mehsulun No'sunu daxil edin: ");
+                        } while (!int.TryParse(Console.ReadLine(), out productno));
+
+                        Product viewedProduct = store.GetProduct(productno);
+                        if (viewedProduct != null)
+                        {
+                            Console.WriteLine("mehsul");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Mehsul No {productno} tapilmadi.");
+                        }
+                        break;
+                    case "4":
+                        Console.Write("Baxmaq istediyiniz mehsullarin type'ini daxil edin: ");
+                        string producttype = Console.ReadLine();
+                        Product[] productsByType = store.FilterProductsByType(producttype);
+                        if (productsByType.Length > 0)
+                        {
+                            for (int i = 0; i < productsByType.Length; i++)
+                            {
+                                Console.WriteLine(productsByType[i]);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Type'i '{producttype}' olan mehsul tapilmadi.");
+                        }
+                        break;
+                    case "5":
+                        Console.Write("Baxmaq istediyiniz mehsullarin adini daxil edin: ");
+                        string productname= Console.ReadLine();
+                        Product[] productsByName = store.FilterProductByName(productname);
+                        if (productsByName.Length > 0)
+                        {
+                            for (int i = 0; i < productsByName.Length; i++)
+                            {
+                                Console.WriteLine(productsByName[i]);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Adi '{productname}' olan mehsul tapilmadi.");
+                        }
+                        break;
+                    case "0":
+                        Console.WriteLine("Proqramdan cixildi.");
+                        return;
+                    default:
+                        Console.WriteLine("Duzgun secim edin!");
+                        break;
+                }
+            } while (true);
+        }
+    }
