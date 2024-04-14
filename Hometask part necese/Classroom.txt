@@ -1,0 +1,93 @@
+ public class Classroom
+    {
+        private static int _id;
+        public int Id { get; set; }
+        private static string _name;    
+        public string Classname
+        {
+            get { return _name; }
+            set
+            {
+                if (value.Length == 5)
+                {
+                    for (int i = 0; i < value.Length; i++)
+                    {
+                        if (char.IsUpper(value[0]) && char.IsUpper(value[1]) && char.IsDigit(value[2]) && char.IsDigit(value[3]) && char.IsDigit(value[4]))
+                        {
+                            _name = value;
+                        }
+                        else
+                        {
+                            throw new Helper("Duzgun daxil edin:");
+                        }
+                    }
+
+                }
+            }
+        }
+        public Student[] Students = new Student[] { };
+        public Classroom()
+        {
+            Id++;
+            Id = _id;
+            
+        }
+                    
+
+        public void StudentAdd(Student student)
+        {
+            Array.Resize(ref Students, Students.Length + 1);
+            Students[Students.Length - 1] = student;  
+        
+        }
+        public Student[] GetStudents()
+        {
+            return Students;
+        }
+        public Student FindId(int id)
+        {
+           
+            for (int i = 0; i < Students.Length; i++)
+            {
+                if (Students[i].Id==id)
+                {
+                    return Students[i];
+                }
+            }
+            return null;
+          
+        }
+
+        public void Delete(int id)
+        {
+            Student[] students = { };
+            for (int i = 0; i < Students.Length; i++)
+            {
+                if (Students[i].Id != id)
+                {
+                    Array.Resize(ref Students, Students.Length + 1);
+                    Students[Students.Length - 1] = Students[i];
+                }
+            }
+          Students = students;
+        }
+        
+           // public  bool ClassChar(string className)
+           // {
+           //     if (string.IsNullOrEmpty(className) || className.Length != 5)
+           //         return false;
+           //
+           //
+           //     if (!char.IsUpper(className[0]) || !char.IsUpper(className[1]))
+           //         return false;
+           //     for (int i = 2; i < className.Length; i++)
+           //     {
+           //         if (!char.IsDigit(className[i]))
+           //             return false;
+           //     }
+           //
+           //     return true;
+           // }
+        
+
+    }

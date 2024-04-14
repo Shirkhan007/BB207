@@ -1,0 +1,7 @@
+  internal class Helper:Exception
+    {
+        public Helper(string message):base(message)
+        {
+
+        }
+    }

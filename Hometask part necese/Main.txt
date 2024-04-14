@@ -1,0 +1,70 @@
+ static void Main(string[] args)
+        {
+            Classroom classroom = new Classroom();
+            do
+            {
+                Console.WriteLine("1.Classroom yarat" +
+                                "\n2.Student yarat" +
+                                "\n3.Butun Telebeleri ekrana cixart" +
+                                "\n4.Secilmis sinifdeki telebeleri ekrana cixart" +
+                                "\n5.Telebe sil ");
+                string answer = Console.ReadLine();
+                switch (answer)
+                {
+                    case "1":
+                        Console.WriteLine("Sinifin adini daxil et:");
+                        classroom.Classname = Console.ReadLine();
+                        break;
+                        case "2":
+                        Console.WriteLine("Telebenin adi");
+                        string name= Console.ReadLine();
+                        Console.WriteLine("Telebenin Soyadi");
+                        string surname= Console.ReadLine();
+                        Student student = new Student(name,surname);
+                        classroom.StudentAdd(student);
+                        break;
+                    case "3":
+                        Student[] students = classroom.GetStudents();
+                        for (int i = 0; i < classroom.GetStudents().Length; i++)
+                        {
+                            students[i].ShowInfo();
+                        }
+                        break;
+                    case "4":
+
+                        string idStr;
+                        int id;
+                        do
+                        {
+                            Console.WriteLine("Axtardiginiz sagirdin id-si daxil et:");
+                            idStr = Console.ReadLine();
+                        } while (!int.TryParse(idStr, out id));
+                        Student student1 = classroom.FindId(id);
+
+                        if (student1 != null)
+                        {
+                            Console.WriteLine("ID: " + student1.Id + ", Name: " + student1.Name + ", SurName: " + student1.SurName);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Şagird tapılmadı!");
+                        }
+                        break;
+                    case "5":
+                        string idStrD;
+                        int iddelete;
+                        do
+                        {
+                            Console.WriteLine("Silmek istediyiniz sagirdin id-si daxil et:");
+                            idStrD = Console.ReadLine();
+                        } while (!int.TryParse(idStrD, out iddelete));
+                        classroom.Delete(iddelete);
+                        
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+            while (true);
+        }
