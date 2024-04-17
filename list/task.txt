@@ -1,0 +1,134 @@
+static void Main(string[] args)
+        {
+            CustomList<int> myList = new CustomList<int>(5);
+
+            myList.Add(1);
+            myList.Add(2);
+            myList.Add(3);
+
+            Console.WriteLine($"Count: {myList.Count}");
+            Console.WriteLine($"Capacity: {myList.Capacity}");
+
+            Console.WriteLine("Items:");
+            myList.Foreach(item => Console.WriteLine(item));
+
+            Console.WriteLine("Finding item: 2");
+            int foundItem = myList.Find(item => item == 2);
+            Console.WriteLine($"Found: {foundItem}");
+
+            Console.WriteLine("Removing item: 2");
+            myList.Remove(2);
+
+            Console.WriteLine($"Count after removing: {myList.Count}");
+
+
+
+            public class CustomList<T>
+        {
+            private T[] items;
+            private int count;
+
+            public int Capacity => items.Length;
+            public int Count => count;
+
+            public CustomList(int capacity)
+            {
+                items = new T[capacity];
+                count = 0;
+            }
+
+            public T this[int index]
+            {
+                get
+                {
+                    if (index < 0 || index >= count)
+                    {
+                        throw new IndexOutOfRangeException();
+                    }
+
+                    return items[index];
+                }
+                set
+                {
+                    if (index < 0 || index >= count)
+                    {
+                        throw new IndexOutOfRangeException();
+                    }
+
+                    items[index] = value;
+                }
+            }
+            public void Add(T item)
+            {
+                if (count == items.Length)
+                {
+                    Array.Resize(ref items, items.Length * 2);
+                }
+
+                items[count] = item;
+                count++;
+            }
+            public T Find(Predicate<T> match)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    if (match(items[i]))
+                    {
+                        return items[i];
+                    }
+                }
+
+                return default(T);
+            }
+            public List<T> FindAll(Predicate<T> match)
+            {
+                List<T> result = new List<T>();
+
+                for (int i = 0; i < count; i++)
+                {
+                    if (match(items[i]))
+                    {
+                        result.Add(items[i]);
+                    }
+                }
+                return result;
+            }
+            public bool Remove(T item)
+            {
+                int index = Array.IndexOf(items, item, 0, count);
+                if (index < 0)
+                {
+                    return false;
+                }
+
+                for (int i = index; i < count - 1; i++)
+                {
+                    items[i] = items[i + 1];
+                }
+
+                count--;
+                return true;
+            }
+            public int RemoveAll(Predicate<T> match)
+            {
+                int removedCount = 0;
+
+                for (int i = 0; i < count; i++)
+                {
+                    if (match(items[i]))
+                    {
+                        Remove(items[i]);
+                        removedCount++;
+                        i--;
+                    }
+                }
+                return removedCount;
+            }
+            public void Foreach(Action<T> action)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    action(items[i]);
+                }
+            }
+        }
