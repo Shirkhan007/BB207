@@ -1,0 +1,29 @@
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+
+namespace ConsoleApp4
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // JSON-a obyekt serializasiyası
+            var person = new Person { Id = 11, Name = "Test", Surname = "Testov", Age = 111 };
+            string json = JsonConvert.SerializeObject(person);
+            Console.WriteLine($"Serializasiya edilmiş JSON: {json}");
+            Console.WriteLine();
+            // JSON-dan obyekt deserializasiyası
+            var deserPerson=JsonConvert.DeserializeObject<Person>(json);
+            Console.WriteLine($"Deserializasiya edilmiş Şəxs: Id={deserPerson.Id}, Ad={deserPerson.Name}, Soyad={deserPerson.Surname}, Yaş={deserPerson.Age}");
+            
+        }
+        
+        public class Person
+        { 
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public int Age { get; set; }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+using System;
+using System.IO;
+using System.Xml.Serialization;
+
+namespace XmlSerializationExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Serialize object to XML
+            var person = new Person { Id = 1, Name = "John", Surname = "Doe", Age = 30 };
+            SerializeToXml(person, "person.xml");
+            Console.WriteLine("Object serialized to XML.");
+
+            // Deserialize XML to object
+            var deserializedPerson = DeserializeFromXml<Person>("person.xml");
+            Console.WriteLine($"Deserialized Person: Id={deserializedPerson.Id}, FirstName={deserializedPerson.Name }, LastName={deserializedPerson.Surname}, Age={deserializedPerson.Age}");
+        }
+
+        static void SerializeToXml<T>(T obj, string filename)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            using (StreamWriter writer = new StreamWriter(filename))
+            {
+                serializer.Serialize(writer, obj);
+            }
+        }
+
+        static T DeserializeFromXml<T>(string filename)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            using (StreamReader reader = new StreamReader(filename))
+            {
+                return (T)serializer.Deserialize(reader);
+            }
+        }
+        public class Person
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string Surname { get; set; }
+            public int Age { get; set; }
+        }
+    }
+
+}
