@@ -1,0 +1,67 @@
+create database Film
+Use Film
+Create table Cinema
+(
+Id int primary key identity,
+Name nvarchar(20) not null
+)
+Create table Movies
+(
+Id int primary key identity,
+Name nvarchar(20) not null,
+CinemaId int foreign key references Cinema(Id)
+)
+Create table Kind
+(
+Id int primary key identity,
+Name nvarchar(20) not null,
+
+)
+create table MovieKind
+(
+Id int primary key identity,
+KindId INT,
+MoviesId INT,
+FOREIGN KEY (KindId) REFERENCES Kind(Id),
+FOREIGN KEY (MoviesId) REFERENCES Movies(Id)
+--KindId int references Kind(Id)
+--MoviesId int foreign key references Movies(Id)
+)
+Create table Place
+(
+Id int primary key identity,
+Name nvarchar(20) not null,
+MoviesId int references Movies(Id)
+)
+create table Prise
+(
+Id int primary key identity,
+Name nvarchar(20) not null,
+)
+create table PlacePrise
+(
+Id int primary key identity,
+PriceId int,
+PlaceId int,
+FOREIGN KEY (PriceId) REFERENCES Prise(Id),
+FOREIGN KEY (PlaceId) REFERENCES Place(Id)
+--PriceId int references Prise(id
+--PlaceId int references Place(Id)
+)
+insert into Cinema values('Cinemaplus'),('Park Bulvar'),('IMax')
+select * from Cinema
+insert into  Movies values('Spider-man',2),('Kunfu-Panda',1),('Batman',3)
+insert into  Kind values('Action'),('Cartoon'),('Action')
+insert into MovieKind values(1,2),(3,3),(2,1)
+insert into Place values('1-ci sira',2),('2-ci sira',3),('3-cu sira',1)
+select Place.Name as [Sira] from Place
+insert into Prise values('20'),('15'),('10')
+select * from Prise
+insert into PlacePrise values(1,3),(2,1),(3,2)
+select * from PlacePrise
+select * from MovieKind
+select * from Kind
+select * from Movies
+select Movies.Id,Movies.Name,Cinema.Name as [Cinema Name] from Movies
+inner join Cinema
+on Movies.CinemaId=Cinema.Id
