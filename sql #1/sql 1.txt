@@ -1,0 +1,62 @@
+create database BlogDb
+use BlogDb
+create table Categories
+(
+İd int primary key identity,
+[Name] nvarchar(33) not null unique
+)
+Create table Tags
+(
+İd int primary key identity,
+[Name] nvarchar(33) not null unique
+)
+create table Users
+(
+İd int primary key identity,
+Username nvarchar(33) not null unique,
+Fullname nvarchar(22) not null unique,
+Age int Check(Age>0 and Age<150)
+)
+create table Comment
+(
+İd int primary key identity,
+Content nvarchar(250) not null Check(Content>0 and Content<150),
+UserId int references Users(Id),
+BlogId int references Blogs(Id)
+)
+create table Blogs
+(
+Id int primary key identity,
+Title nvarchar(33) not null  check(Title>0 and Title<50),
+Description nvarchar(22) not null,
+UserId int references Users(Id),
+CategoriesId int references Categories(Id)
+)
+Create table BlogsTags
+(
+Id int primary key identity,
+BlogsId int references Blogs(Id),
+TagsId int references Tags(Id)
+)
+create view Show as
+select  Blogs.Title,Users.Fullname,Users.Username from Blogs
+Join Users
+on users.İd=blogs.UserId
+create view Show1 as
+select  Blogs.Title,Categories.Name from Blogs
+Join Categories
+on Categories.İd=blogs.CategoriesId
+create procudure CommentAdd
+@userId int
+as
+select c.Content
+from Comment c
+where c.UserId=@userId
+exec CommentAdd 3
+create procudure BlogsAdd
+@userId int
+as
+select *
+from Blogs b
+where b.UserId=@userId
+exec BlogsAdd 3
