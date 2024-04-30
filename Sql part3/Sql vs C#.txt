@@ -1,0 +1,49 @@
+using System;
+using System.Data.SqlClient;
+namespace SqlConnections
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            string connectoinString = "Server=LAPTOP-L5CMKO5P\\SQLEXPRESS01," +
+                                      "database=Users," +
+                                      "Trusted_Connection=true," +
+                                      "Integrated security=true";
+
+            using SqlConnection connection = new SqlConnection(connectoinString);
+            {
+                connection.Open();
+                string createTable = "Create Table Users(Id int primary key Identity,Name nvarchar(50) not null)";
+                using SqlCommand command = new SqlCommand(createTable, connection);
+                {
+                    command.ExecuteNonQuery();
+                }
+                string addQuery = "INSERT INTO Users (ID, Name) VALUES (1, Test)";
+                using (SqlCommand command1 = new SqlCommand(addQuery, connection))
+                {
+                    command1.Parameters.AddWithValue("@id", 1);
+                    command1.Parameters.AddWithValue("@name", "John");
+                    command1.ExecuteNonQuery();
+                }
+                string updateQuery = "UPDATE Users SET Name = Test WHERE ID = 1";
+
+
+                using (SqlCommand command2 = new SqlCommand(updateQuery, connection))
+                {
+                    command2.Parameters.AddWithValue("@id", 1);
+                    command2.Parameters.AddWithValue("@name", "Jane");
+                    command2.ExecuteNonQuery();
+
+                }
+                string deleteQuery = "DELETE FROM Users WHERE ID = 1";
+                using (SqlCommand command3 = new SqlCommand(deleteQuery, connection))
+                {
+                    command3.Parameters.AddWithValue("@id", 1);
+                    command3.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+    }
+}
